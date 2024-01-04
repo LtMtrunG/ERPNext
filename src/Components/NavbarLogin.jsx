@@ -1,7 +1,7 @@
 import { MDBBtn } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
-const Navbar = () => {
+const NavbarLogin = () => {
     const textStyle = {
         color: '#243C54',
     };
@@ -21,8 +21,7 @@ const Navbar = () => {
                 <img className="navbar-brand" to="/" src="./src/assets/brand.png" width="80" alt="" />
             </Link>
             <div class="container">
-                <div className="col">
-
+                <div className="col-10 col-md-8">
                     <div className="collapse navbar-collapse" id="navbarNav">
 
                         <ul className="navbar-nav">
@@ -47,20 +46,24 @@ const Navbar = () => {
                                     onClick={() => scrollToSection('pricing')}
                                 >Pricing</ScrollLink>
                             </li>
+                            <li className="nav-item">
+                                <ScrollLink
+                                    className="nav-link fs-5 fw-bold hello"
+                                    style={textStyle}
+                                    to="pricing"
+                                    smooth={true}
+                                    onClick={() => scrollToSection('pricing')}
+                                >My subscription</ScrollLink>
+                            </li>
                         </ul>
                     </div>
                 </div>
-                <div className="col align-items-center">
+                <div className="col">
                     <MDBBtn
-                        className="col-sm-3 ml-6 fs-5"
+                        className="col-sm-5 fs-5 ml-7"
                         style={{ color: '#FFFFFF', background: '#243C54', border: 'none' }}
-                        onClick={() => navigate('/Login')}
+                        onClick={() => navigate('/Freetrial1')}
                     >Try for free</MDBBtn>
-                    <MDBBtn 
-                        className="col-sm-3 ml-5 fs-5" 
-                        style={{ color: '#FFFFFF', background: '#243C54', border: 'none' }}
-                        onClick={() => navigate('/Login')}
-                    >Log in</MDBBtn>
                 </div>
             </div>
         </nav>
@@ -68,5 +71,5 @@ const Navbar = () => {
     )
 }
 
-export default Navbar;
+export default NavbarLogin;
 
