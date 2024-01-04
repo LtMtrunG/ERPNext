@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../Components/Navbar'
+import { useNavigate } from "react-router-dom";
 import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 
 const Signup = () => {
@@ -15,17 +15,22 @@ const Signup = () => {
     };
 
     const containerStyle = {
+        position: 'relative',
         backgroundColor: '#243C54',
+        width: '100vw',
+        height: '100vh',
+        paddingLeft: 0,
     };
+
+    const navigate = useNavigate();
 
     return (
         <div>
-            <Navbar />
-            <MDBContainer fluid className="p-3  h-custom">
+            <div className="container-fluid" style={containerStyle}>
 
                 <MDBRow>
 
-                    <MDBCol col='10' md='6' className='d-flex flex-column align-items-center'>
+                    <MDBCol col='10' md='6' className='d-flex flex-column align-items-center' style={{ background: '#FFFFFF', height: '100vh' }}>
                         <img className='image-fluid' href="#" src="./src/assets/brand.png" width="400" alt="" />
                         <h1 className='display-1' style={textStyle}>Last Breath</h1>
                     </MDBCol>
@@ -68,16 +73,24 @@ const Signup = () => {
                                         />
                                     </div>
 
-                                    <MDBBtn className="col-md-4 mb-1" style={{ color: '#243C54', background: 'white', border: 'none' }}>Sign up</MDBBtn>
+                                    <MDBBtn 
+                                        className="col-md-4 mb-1" 
+                                        style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
+                                        onClick={() => navigate('/Login')}
+                                    >Sign up</MDBBtn>
                                 </div>
                             </div>
 
                             <div className="d-flex flex-row align-items-center justify-content-center pb-4 mt-4">
 
                                 <p class="text-muted mb-0">Already have an account?</p>
-                                <MDBBtn outline className='mx-2' color='#FFFFFF' style={{ color: '#FFFFFF', fontWeight: 'bold', border: 'none' }}>
-                                    Log in
-                                </MDBBtn>
+                                <MDBBtn 
+                                    outline 
+                                    className='mx-2' 
+                                    color='#FFFFFF' 
+                                    style={{ color: '#FFFFFF', fontWeight: 'bold', border: 'none', height: '40px' }}
+                                    onClick={() => navigate('/Login')}
+                                >Log in</MDBBtn>
 
                             </div>
 
@@ -86,9 +99,7 @@ const Signup = () => {
                     </MDBCol>
 
                 </MDBRow>
-
-
-            </MDBContainer>
+            </div>
         </div>
     );
 }

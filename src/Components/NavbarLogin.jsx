@@ -18,7 +18,7 @@ const NavbarLogin = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ width: '100vw' }} >
             <Link className="navbar-brand pl-logo" href="#">
-                <img className="navbar-brand" to="/" src="./src/assets/brand.png" width="80" alt="" />
+                <img className="navbar-brand" to="/HomeLogin" src="./src/assets/brand.png" width="80" alt="" />
             </Link>
             <div class="container">
                 <div className="col-10 col-md-8">
@@ -26,7 +26,7 @@ const NavbarLogin = () => {
 
                         <ul className="navbar-nav">
                             <li className="nav-item active">
-                                <Link className="nav-link fs-5  fw-bold" style={textStyle} to="/">Last Breath</Link>
+                                <Link className="nav-link fs-5  fw-bold" style={textStyle} to="/HomeLogin">Last Breath</Link>
                             </li>
                             <li className="nav-item">
                                 <ScrollLink
@@ -61,7 +61,7 @@ const NavbarLogin = () => {
                 <div className="col">
                     <MDBBtn
                         className="col-sm-5 fs-5 ml-7"
-                        style={{ color: '#FFFFFF', background: '#243C54', border: 'none' }}
+                        style={{ color: '#FFFFFF', background: '#243C54', border: 'none', height: '40px' }}
                         onClick={() => navigate('/Freetrial1')}
                     >Try for free</MDBBtn>
                 </div>

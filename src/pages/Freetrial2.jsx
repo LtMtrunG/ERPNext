@@ -111,7 +111,7 @@ const Freetrial2 = () => {
 
                   <MDBBtn 
                     className="col-md-4 mb-1" 
-                    style={{ color: '#243C54', background: 'white', border: 'none' }}
+                    style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
                     onClick={() => navigate('/Successfulpayment')}
                   >Get started</MDBBtn>
                 </div>

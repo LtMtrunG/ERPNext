@@ -65,18 +65,22 @@ const Login = () => {
 
                                 <MDBBtn
                                     className="col-md-4 mb-1"
-                                    style={{ color: '#243C54', background: 'white', border: 'none' }}
+                                    style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
                                     onClick={() => navigate('/HomeLogin')}
-                                >Sign in</MDBBtn>
+                                >Log in</MDBBtn>
                             </div>
                         </div>
 
                         <div className="d-flex flex-row align-items-center justify-content-center pb-4 mt-4">
 
                             <p class="text-muted mb-0">Don't have an account?</p>
-                            <MDBBtn outline className='mx-2' color='#FFFFFF' style={{ color: '#FFFFFF', fontWeight: 'bold', border: 'none' }} onClick={() => navigate('/Signup')}>
-                                Sign up
-                            </MDBBtn>
+                            <MDBBtn 
+                                outline 
+                                className='mx-2' 
+                                color='#FFFFFF' 
+                                style={{ color: '#FFFFFF', fontWeight: 'bold', border: 'none', height: '40px' }} 
+                                onClick={() => navigate('/Signup')}
+                            >Sign up</MDBBtn>
 
                         </div>
 
