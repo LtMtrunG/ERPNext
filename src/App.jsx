@@ -1,5 +1,6 @@
 import Home from "./pages/Home"
 import Login from "./pages/login"
+import Signup from "./pages/Signup"
 import HomeLogin from "./pages/HomeLogin"
 import Freetrial1 from "./pages/Freetrial1"
 import Freetrial2 from "./pages/Freetrial2"
@@ -13,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home/>}></Route>
           <Route path="/Login" element={<Login/>}></Route>
+          <Route path="/Signup" element={<Signup/>}></Route>
           <Route path="/HomeLogin" element={<HomeLogin/>}></Route>
           <Route path="/Freetrial1" element={<Freetrial1/>}></Route>
           <Route path="/Freetrial2" element={<Freetrial2/>}></Route>

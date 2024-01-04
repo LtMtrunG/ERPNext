@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './Components/Navbar'
+import Navbar from '../Components/Navbar'
 import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 
 const Signup = () => {

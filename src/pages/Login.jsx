@@ -74,7 +74,7 @@ const Login = () => {
                         <div className="d-flex flex-row align-items-center justify-content-center pb-4 mt-4">
 
                             <p class="text-muted mb-0">Don't have an account?</p>
-                            <MDBBtn outline className='mx-2' color='#FFFFFF' style={{ color: '#FFFFFF', fontWeight: 'bold', border: 'none' }}>
+                            <MDBBtn outline className='mx-2' color='#FFFFFF' style={{ color: '#FFFFFF', fontWeight: 'bold', border: 'none' }} onClick={() => navigate('/Signup')}>
                                 Sign up
                             </MDBBtn>
 
