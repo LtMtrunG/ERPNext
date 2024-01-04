@@ -28,10 +28,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <section id="pricing">
-        <Footer />
-      </section>
-
+      <Footer />
     </div>
   )
 }

@@ -6,6 +6,7 @@ import Freetrial1 from "./pages/Freetrial1"
 import Freetrial2 from "./pages/Freetrial2"
 import Successfulpayment from "./pages/Successfulpayment"
 import {Route, Routes} from "react-router-dom"
+import Mysubscription from "./pages/Mysubscription"
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/Freetrial1" element={<Freetrial1/>}></Route>
           <Route path="/Freetrial2" element={<Freetrial2/>}></Route>
           <Route path="/Successfulpayment" element={<Successfulpayment/>}></Route>
+          <Route path="/Mysubscription" element={<Mysubscription/>}></Route>
         </Routes>
       </div>
     </>

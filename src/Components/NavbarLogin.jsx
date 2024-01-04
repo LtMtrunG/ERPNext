@@ -17,8 +17,8 @@ const NavbarLogin = () => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ width: '100vw' }} >
-            <Link className="navbar-brand pl-logo" href="#">
-                <img className="navbar-brand" to="/HomeLogin" src="./src/assets/brand.png" width="80" alt="" />
+            <Link className="navbar-brand pl-logo" to="/HomeLogin">
+                <img className="navbar-brand" to="/HomeLogin" src="./src/assets/brand.png" width="80" alt="" style={{ marginRight: '-40px' }}/>
             </Link>
             <div class="container">
                 <div className="col-10 col-md-8">
@@ -33,7 +33,6 @@ const NavbarLogin = () => {
                                     className="nav-link fs-5 fw-bold hello"
                                     style={textStyle}
                                     to="aboutUs"
-                                    smooth={true}
                                     onClick={() => scrollToSection('aboutUs')}
                                 >About Us</ScrollLink>
                             </li>
@@ -42,18 +41,15 @@ const NavbarLogin = () => {
                                     className="nav-link fs-5 fw-bold hello"
                                     style={textStyle}
                                     to="pricing"
-                                    smooth={true}
-                                    onClick={() => scrollToSection('pricing')}
-                                >Pricing</ScrollLink>
+                                    onClick={() => scrollToSection('pricing')}                                
+                                >Pricing</ScrollLink> 
                             </li>
                             <li className="nav-item">
-                                <ScrollLink
+                                <Link
                                     className="nav-link fs-5 fw-bold hello"
                                     style={textStyle}
-                                    to="pricing"
-                                    smooth={true}
-                                    onClick={() => scrollToSection('pricing')}
-                                >My subscription</ScrollLink>
+                                    to="/Mysubscription"
+                                >My subscription</Link>
                             </li>
                         </ul>
                     </div>
