@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import { useNavigate } from "react-router-dom";
+import { Authenticator} from "@aws-amplify/ui-react"
+
+import Amplify, { Auth, Hub,Default } from 'aws-amplify';
+import '@aws-amplify/ui-react/styles.css'
 
 const Login = () => {
 
@@ -22,11 +26,45 @@ const Login = () => {
         paddingLeft: 0,
     };
 
+    // useEffect(() => {
+    //     const fetchAuthenticatedUser = async () => {
+    //       try {
+    //         const user = await Auth.currentAuthenticatedUser();
+    //         console.log('user = ', user.pool);
+    //       } catch (error) {
+    //         console.log('Error fetching authenticated user:', error);
+    //       }
+    //     };
+    
+    //     fetchAuthenticatedUser();
+    //   }, []);
+
+    useEffect(() => {
+        Amplify.configure({ Auth: cognito });
+        Hub.listen('auth', ({ payload: { event, data } }) => {
+            switch (event) {
+                case 'signIn':
+                    console.log('Event name -> ', event, data)
+                    // here is your name, email e.t.c.
+                    console.log(data.signInUserSession.idToken.payload);
+                    break
+                case 'signOut':
+                    console.log('sign out')
+                    // this.setState({ user: null })
+                    break
+                default:
+                    console.log('Unhandled use case - ' + event)
+            }
+        })
+    }, [])
     const navigate = useNavigate();
 
     return (
         <div className="container-fluid" style={containerStyle}>
-
+            <Authenticator>
+                
+            </Authenticator>
+{/* 
             <MDBRow>
 
                 <MDBCol col='10' md='6' className='d-flex flex-column align-items-center' style={{ background: '#FFFFFF', height: '100vh' }}>
@@ -88,7 +126,7 @@ const Login = () => {
 
                 </MDBCol>
 
-            </MDBRow>
+            </MDBRow> */}
         </div>
     );
 }

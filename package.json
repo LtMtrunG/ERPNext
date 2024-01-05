@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aws-amplify/auth": "^6.0.10",
+    "@aws-amplify/ui-react": "^6.1.0",
+    "aws-amplify": "^6.0.10",
     "mdb-react-ui-kit": "^7.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -56,11 +56,13 @@ const Navbar = () => {
                         style={{ color: '#FFFFFF', background: '#243C54', border: 'none', height: '40px' }}
                         onClick={() => navigate('/Login')}
                     >Try for free</MDBBtn>
+                    {/* <a href="https://erpconnect.auth.us-east-1.amazoncognito.com/login?client_id=32snlld19t64ftvfuqjgonk2ib&login_uri=https%3A%2F%2Flocalhost%3A5173%2FLogin"> */}
                     <MDBBtn 
                         className="col-sm-3 ml-5 fs-5" 
                         style={{ color: '#FFFFFF', background: '#243C54', border: 'none', height: '40px' }}
                         onClick={() => navigate('/Login')}
                     >Log in</MDBBtn>
+                    {/* </a> */}
                 </div>
             </div>
         </nav>

@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-erpconnect-dev-135834-authRole",
+      "UnauthRoleArn": "arn:aws:iam::877354152485:role/amplify-erpconnect-dev-135834-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::877354152485:role/amplify-erpconnect-dev-135834-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-erpconnect-dev-135834-deployment",
+      "UnauthRoleName": "amplify-erpconnect-dev-135834-unauthRole",
+      "StackName": "amplify-erpconnect-dev-135834",
+      "StackId": "arn:aws:cloudformation:us-east-1:877354152485:stack/amplify-erpconnect-dev-135834/dd0a1160-ab97-11ee-b844-0e4c19dbed17",
+      "AmplifyAppId": "d85fppfsab862"
+    },
+    "categories": {
+      "auth": {
+        "erpconnect351a4cad": {}
+      }
+    }
+  }
+}
