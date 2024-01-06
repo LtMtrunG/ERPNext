@@ -8,7 +8,7 @@ import Successfulpayment from "./pages/Successfulpayment"
 import {Route, Routes} from "react-router-dom"
 import Mysubscription from "./pages/Mysubscription"
 import {Amplify} from 'aws-amplify'
-import config from './amplifyconfiguration';
+import config from './aws-exports';
 Amplify.configure(config);
 
 const App = () => {
