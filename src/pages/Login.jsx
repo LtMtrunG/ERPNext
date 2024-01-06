@@ -1,10 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
-import { useNavigate } from "react-router-dom";
-import { Authenticator} from "@aws-amplify/ui-react"
-
-import Amplify, { Auth, Hub,Default } from 'aws-amplify';
+import { Authenticator } from "@aws-amplify/ui-react";
+import { getCurrentUser, signOut } from 'aws-amplify/auth';
+import { UserContext } from '../UserContext.jsx';
+import { Route, Routes } from "react-router-dom";
+import { Link, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Hub } from 'aws-amplify/utils'
 import '@aws-amplify/ui-react/styles.css'
+import HomeLogin from './HomeLogin';
+import { name } from 'ejs';
 
 const Login = () => {
 
@@ -18,6 +23,11 @@ const Login = () => {
         fontWeight: 'bold',
     };
 
+    const nameStyle = {
+        color: '#FFFFFF',
+        fontWeight: 'medium',
+    };
+
     const containerStyle = {
         position: 'relative',
         backgroundColor: '#243C54',
@@ -26,45 +36,48 @@ const Login = () => {
         paddingLeft: 0,
     };
 
-    // useEffect(() => {
-    //     const fetchAuthenticatedUser = async () => {
-    //       try {
-    //         const user = await Auth.currentAuthenticatedUser();
-    //         console.log('user = ', user.pool);
-    //       } catch (error) {
-    //         console.log('Error fetching authenticated user:', error);
-    //       }
-    //     };
-    
-    //     fetchAuthenticatedUser();
-    //   }, []);
-
-    useEffect(() => {
-        Amplify.configure({ Auth: cognito });
-        Hub.listen('auth', ({ payload: { event, data } }) => {
-            switch (event) {
-                case 'signIn':
-                    console.log('Event name -> ', event, data)
-                    // here is your name, email e.t.c.
-                    console.log(data.signInUserSession.idToken.payload);
-                    break
-                case 'signOut':
-                    console.log('sign out')
-                    // this.setState({ user: null })
-                    break
-                default:
-                    console.log('Unhandled use case - ' + event)
-            }
-        })
-    }, [])
+    const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
+
+    Hub.listen('auth', ({ payload }) => {
+        switch (payload.event) {
+            case 'signedIn':
+                console.log('user have been signedIn successfully.');
+                if (redirect !== false) {
+                    console.log(user);
+                    navigate('/HomeLogin');
+                }
+                break;
+            case 'signedOut':
+                console.log('user have been signedOut successfully.');
+                break;
+            case 'tokenRefresh':
+                console.log('auth tokens have been refreshed.');
+                break;
+            case 'tokenRefresh_failure':
+                console.log('failure while refreshing auth tokens.');
+                break;
+            case 'signInWithRedirect':
+                console.log('signInWithRedirect API has successfully been resolved.');
+                break;
+            case 'signInWithRedirect_failure':
+                console.log('failure while trying to resolve signInWithRedirect API.');
+                break;
+            case 'customOAuthState':
+                logger.info('custom state returned from CognitoHosted UI');
+                break;
+        }
+    });
+
+    const handleUserUpdateAndNavigate = (currUser) => {
+        // Assuming userStateToUpdate is the new user state value
+        setUser(currUser);
+        navigate('/HomeLogin'); // Replace '/newPage' with your desired path
+    };
+
 
     return (
         <div className="container-fluid" style={containerStyle}>
-            <Authenticator>
-                
-            </Authenticator>
-{/* 
             <MDBRow>
 
                 <MDBCol col='10' md='6' className='d-flex flex-column align-items-center' style={{ background: '#FFFFFF', height: '100vh' }}>
@@ -76,57 +89,35 @@ const Login = () => {
 
                     <div className="d-flex flex-column ms-5 mt-5">
 
-                        <div className="text-center">
-                            <h1 className="mt-1 mb-5 mt-5 pb-1" style={loginStyle}>Log in</h1>
-                        </div>
+                        <Authenticator>
+                            {({ signOut, user }) => (
+                                <main>
+                                    <div class="col  d-flex justify-content-end align-items-start">
+                                    <h3 style={nameStyle}>Hi, {user.username}</h3>
 
-                        <div className="container d-flex flex-column justify-content-center">
-                            <div className="row justify-content-center">
-                                <div className="col-md-10 mb-5">
-                                    <MDBInput
-                                        type="text"
-                                        id="username"
-                                        className="form-control"
-                                        placeholder="Username"
-                                        style={{ width: '100%' }}
-                                    />
-                                </div>
-
-                                <div className="col-md-10 mb-5">
-                                    <MDBInput
-                                        type="password"
-                                        id="password"
-                                        className="form-control"
-                                        placeholder="Password"
-                                    />
-                                </div>
-
-                                <MDBBtn
-                                    className="col-md-4 mb-1"
-                                    style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
-                                    onClick={() => navigate('/HomeLogin')}
-                                >Log in</MDBBtn>
-                            </div>
-                        </div>
-
-                        <div className="d-flex flex-row align-items-center justify-content-center pb-4 mt-4">
-
-                            <p class="text-muted mb-0">Don't have an account?</p>
-                            <MDBBtn 
-                                outline 
-                                className='mx-2' 
-                                color='#FFFFFF' 
-                                style={{ color: '#FFFFFF', fontWeight: 'bold', border: 'none', height: '40px' }} 
-                                onClick={() => navigate('/Signup')}
-                            >Sign up</MDBBtn>
-
-                        </div>
+                                    </div>
+                                    <div className="text-center">
+                                        <h1 className="mb-5 mt-5 pb-1" style={loginStyle}>Log in successfully</h1>
+                                    </div>
+                                    <div className="container d-flex flex-column justify-content-center">
+                                        <div className="row justify-content-center">
+                                            <MDBBtn
+                                                className="col-md-7 mb-1"
+                                                style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
+                                                onClick={() => handleUserUpdateAndNavigate(user)}
+                                            >Go to home page</MDBBtn>
+                                        </div>
+                                    </div>
+                                    {/* <button onClick={signOut}>Sign out</button> */}
+                                </main>
+                            )}
+                        </Authenticator>
 
                     </div>
 
                 </MDBCol>
 
-            </MDBRow> */}
+            </MDBRow>
         </div>
     );
 }

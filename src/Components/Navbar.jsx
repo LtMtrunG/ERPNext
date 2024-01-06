@@ -27,7 +27,7 @@ const Navbar = () => {
 
                         <ul className="navbar-nav">
                             <li className="nav-item active">
-                                <Link className="nav-link fs-5 fw-bold" style={textStyle} to="/">Last Breath</Link>
+                                <Link className="nav-link fs-5 fw-bold" style={textStyle} to="/">ERPConnect</Link>
                             </li>
                             <li className="nav-item">
                                 <ScrollLink

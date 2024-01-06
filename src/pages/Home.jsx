@@ -12,7 +12,7 @@ const Home = () => {
     <div>
       <Navbar />
       <Header />
-      <div className='container-fluid d-flex flex-column justify-content-center align-items-center pl-6'>
+      <div className='container-fluid d-flex flex-column justify-content-center align-items-center'>
         <img href="#" src="./src/assets/homeComic.png" width="1100" alt="" />
       </div>
       <div className="container-fluid" style={containerStyle}>

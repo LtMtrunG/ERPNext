@@ -1,6 +1,9 @@
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 import NavbarLogin from '../Components/NavbarLogin';
+import { UserContext } from '../UserContext.jsx';
+import React, { useContext, useEffect, useState } from 'react';
+
 const HomeLogin = () => {
   const containerStyle = {
     position: 'relative',
@@ -8,11 +11,13 @@ const HomeLogin = () => {
     width: '100vw',
     paddingLeft: 0,
   };
+  const {user} = useContext(UserContext);
+
   return (
     <div>
       <NavbarLogin/>
       <Header />
-      <div className='container-fluid d-flex flex-column justify-content-center align-items-center pl-6'>
+      <div className='container-fluid d-flex flex-column justify-content-center align-items-center'>
         <img href="#" src="./src/assets/homeComic.png" width="1100" alt="" />
       </div>
       <div className="container-fluid" style={containerStyle}>
