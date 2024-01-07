@@ -1,6 +1,8 @@
 import { MDBBtn } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
+import { getCurrentUser, signOut } from 'aws-amplify/auth';
+
 const NavbarLogin = () => {
     const textStyle = {
         color: '#243C54',
@@ -14,6 +16,12 @@ const NavbarLogin = () => {
     };
 
     const navigate = useNavigate();
+
+    const handleLogoutAndNavigate = () => {
+        // Assuming userStateToUpdate is the new user state value
+        signOut()
+        navigate('/'); // Replace '/newPage' with your desired path
+    };
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ width: '100vw' }} >
@@ -54,12 +62,17 @@ const NavbarLogin = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="col">
+                <div className="col align-items-center">
                     <MDBBtn
-                        className="col-sm-5 fs-5 ml-7"
+                        className="col-sm-5 fs-5"
                         style={{ color: '#FFFFFF', background: '#243C54', border: 'none', height: '40px' }}
                         onClick={() => navigate('/Freetrial1')}
                     >Try for free</MDBBtn>
+                    <MDBBtn 
+                        className="col-sm-5 ml-3 fs-5" 
+                        style={{ color: '#FFFFFF', background: '#243C54', border: 'none', height: '40px' }}
+                        onClick={() => handleLogoutAndNavigate()}
+                    >Sign out</MDBBtn>
                 </div>
             </div>
         </nav>

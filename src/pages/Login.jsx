@@ -3,13 +3,9 @@ import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } 
 import { Authenticator } from "@aws-amplify/ui-react";
 import { getCurrentUser, signOut } from 'aws-amplify/auth';
 import { UserContext } from '../UserContext.jsx';
-import { Route, Routes } from "react-router-dom";
-import { Link, Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Hub } from 'aws-amplify/utils'
 import '@aws-amplify/ui-react/styles.css'
-import HomeLogin from './HomeLogin';
-import { name } from 'ejs';
 
 const Login = () => {
 

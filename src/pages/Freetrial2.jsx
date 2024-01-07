@@ -72,9 +72,7 @@ const Freetrial2 = () => {
 
               </form>
             </div>
-
-            {/* </div> */}
-
+            
           </MDBCol>
 
         </MDBRow>

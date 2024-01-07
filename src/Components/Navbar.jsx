@@ -21,7 +21,7 @@ const Navbar = () => {
                 <img className="navbar-brand" to="/" src="./src/assets/brand.png" width="80" alt="" style={{ marginRight: '-40px' }}/>
             </Link>
             <div class="container">
-                <div className="col">
+                <div className="col-10 col-md-8">
 
                     <div className="collapse navbar-collapse" id="navbarNav">
 
@@ -52,17 +52,15 @@ const Navbar = () => {
                 </div>
                 <div className="col align-items-center">
                     <MDBBtn
-                        className="col-sm-3 ml-6 fs-5"
+                        className="col-sm-5 fs-5"
                         style={{ color: '#FFFFFF', background: '#243C54', border: 'none', height: '40px' }}
                         onClick={() => navigate('/Login')}
                     >Try for free</MDBBtn>
-                    {/* <a href="https://erpconnect.auth.us-east-1.amazoncognito.com/login?client_id=32snlld19t64ftvfuqjgonk2ib&login_uri=https%3A%2F%2Flocalhost%3A5173%2FLogin"> */}
                     <MDBBtn 
-                        className="col-sm-3 ml-5 fs-5" 
+                        className="col-sm-5 ml-3 fs-5" 
                         style={{ color: '#FFFFFF', background: '#243C54', border: 'none', height: '40px' }}
                         onClick={() => navigate('/Login')}
                     >Log in</MDBBtn>
-                    {/* </a> */}
                 </div>
             </div>
         </nav>
