@@ -40,7 +40,7 @@ const Freetrial1 = () => {
           <MDBCol col='10' md='6'>
 
             <div className="d-flex flex-column ms-5 mt-5">
-              <h1 className="mt-1 mb-5 mt-5 pb-1 text-center" style={loginStyle}>Free trial</h1>
+              <h1 className="mt-1 mb-5 pb-1 text-center" style={loginStyle}>Free trial</h1>
               <p className='text-center mb-5' style={loginStyle}>Your trial will last for 14 days; after that, if you do not purchase a plan, all your data will be LOST</p>
 
 
