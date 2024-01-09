@@ -1,4 +1,4 @@
-
+import StripePricingTable from "./StripePricingTable";
 const Footer = () => {
 
     const cardStyle = {
@@ -20,10 +20,12 @@ const Footer = () => {
 
 
     return (
+            
         <nav className="footer section" id="pricing" style={{width: '100vw'}}>
             <div className="container-fluid text-center mb-5">
             <h1 className="nav-link fs-3  fw-bold mt-5 mb-5" style={textStyle} href="#">Pricing</h1>
-                <div className="row align-items-center pl-pricing">
+            <StripePricingTable/>
+                {/* <div className="row align-items-center pl-pricing">
                     <div className="col">
                         <div className="card lower-card" style={cardStyle}>
                             <div className="card-body d-flex flex-column justify-content-between">
@@ -66,7 +68,7 @@ const Footer = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
         </nav>

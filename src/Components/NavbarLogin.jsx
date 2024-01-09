@@ -26,7 +26,7 @@ const NavbarLogin = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ width: '100vw' }} >
             <Link className="navbar-brand pl-logo" to="/HomeLogin">
-                <img className="navbar-brand" to="/HomeLogin" src="./src/assets/brand.png" width="80" alt="" style={{ marginRight: '-40px' }}/>
+                <img className="navbar-brand" to="/HomeLogin" href="https://amplify-erpconnect-dev-135834-deployment.s3.amazonaws.com/brand.png" width="80" alt="" style={{ marginRight: '-40px' }}/>
             </Link>
             <div class="container">
                 <div className="col-10 col-md-8">

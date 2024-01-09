@@ -18,7 +18,7 @@ const HomeLogin = () => {
       <NavbarLogin/>
       <Header />
       <div className='container-fluid d-flex flex-column justify-content-center align-items-center'>
-        <img href="#" src="./src/assets/homeComic.png" width="1100" alt="" />
+        <img href="#" src="https://erpnext.com/files/erpnext-comic400604.png" width="1100" alt="" />
       </div>
       <div className="container-fluid" style={containerStyle}>
         <div className="row align-items-center">
@@ -29,7 +29,7 @@ const HomeLogin = () => {
             <p className="text-white">Based on the Frappe Framework</p>
           </div>
           <div className="col ml-aboutUs">
-            <img className="navbar-brand mt-5 mb-5" href="#" src="./src/assets/homeContent.png" width="450" alt="" />
+            <img className="navbar-brand mt-5 mb-5" href="#" src="https://erpnext.com/files/erpnext-hero-compressed.png" width="450" alt="" />
           </div>
         </div>
       </div>

@@ -17,7 +17,9 @@ const App = () => {
     const [user, setUser] = useState(null);
 
 
+
   return (
+    
     <UserContext.Provider value={{ user, setUser }}>
       <Routes>
         <Route path="/" element={<Home />}></Route>
