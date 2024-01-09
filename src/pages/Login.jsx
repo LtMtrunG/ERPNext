@@ -78,7 +78,7 @@ const Login = () => {
 
                 <MDBCol col='10' md='6' className='d-flex flex-column align-items-center' style={{ background: '#FFFFFF', height: '100vh' }}>
                     <img className='image-fluid' href="#" src="./src/assets/brand.png" width="400" alt="" />
-                    <h1 className='display-1' style={textStyle}>Last Breath</h1>
+                    <h1 className='display-1' style={textStyle}>ERPConnect</h1>
                 </MDBCol>
 
                 <MDBCol col='10' md='6'>
