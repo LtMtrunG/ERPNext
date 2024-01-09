@@ -1,0 +1,20 @@
+type Plan @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Company_Name: String
+  Types: String
+  Next_Payment_Date: String
+  Ec2_IP_Address: String
+  Payment_Status: String
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Company_Name: String
+  Phone_Number: String
+  City: String
+  Business_Field: String
+  Contact_Person: String
+  Contact_Phone_Number: String
+  Description: String
+  Amount_People: Int
+}
