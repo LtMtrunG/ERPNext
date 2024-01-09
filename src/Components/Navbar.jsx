@@ -18,16 +18,16 @@ const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ width: '100vw' }} >
             <Link className="navbar-brand pl-logo" to="/">
-                <img className="navbar-brand" to="/" src="./src/assets/brand.png" width="80" alt="" style={{ marginRight: '-40px' }}/>
+                <img className="navbar-brand" to="/" src="https://amplify-erpconnect-dev-135834-deployment.s3.amazonaws.com/brand.png" width="80" alt="" style={{ marginRight: '-40px' }}/>
             </Link>
             <div class="container">
-                <div className="col">
+                <div className="col-10 col-md-8">
 
                     <div className="collapse navbar-collapse" id="navbarNav">
 
                         <ul className="navbar-nav">
                             <li className="nav-item active">
-                                <Link className="nav-link fs-5 fw-bold" style={textStyle} to="/">Last Breath</Link>
+                                <Link className="nav-link fs-5 fw-bold" style={textStyle} to="/">ERPConnect</Link>
                             </li>
                             <li className="nav-item">
                                 <ScrollLink
@@ -52,12 +52,12 @@ const Navbar = () => {
                 </div>
                 <div className="col align-items-center">
                     <MDBBtn
-                        className="col-sm-3 ml-6 fs-5"
+                        className="col-sm-5 fs-5"
                         style={{ color: '#FFFFFF', background: '#243C54', border: 'none', height: '40px' }}
                         onClick={() => navigate('/Login')}
                     >Try for free</MDBBtn>
                     <MDBBtn 
-                        className="col-sm-3 ml-5 fs-5" 
+                        className="col-sm-5 ml-3 fs-5" 
                         style={{ color: '#FFFFFF', background: '#243C54', border: 'none', height: '40px' }}
                         onClick={() => navigate('/Login')}
                     >Log in</MDBBtn>
