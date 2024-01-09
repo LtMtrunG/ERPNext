@@ -4,12 +4,13 @@
 export const onCreatePlan = /* GraphQL */ `
   subscription OnCreatePlan($filter: ModelSubscriptionPlanFilterInput) {
     onCreatePlan(filter: $filter) {
-      id
+      Id
       Company_Name
       Types
       Next_Payment_Date
       Ec2_IP_Address
       Payment_Status
+      id
       createdAt
       updatedAt
       __typename
@@ -19,12 +20,13 @@ export const onCreatePlan = /* GraphQL */ `
 export const onUpdatePlan = /* GraphQL */ `
   subscription OnUpdatePlan($filter: ModelSubscriptionPlanFilterInput) {
     onUpdatePlan(filter: $filter) {
-      id
+      Id
       Company_Name
       Types
       Next_Payment_Date
       Ec2_IP_Address
       Payment_Status
+      id
       createdAt
       updatedAt
       __typename
@@ -34,12 +36,13 @@ export const onUpdatePlan = /* GraphQL */ `
 export const onDeletePlan = /* GraphQL */ `
   subscription OnDeletePlan($filter: ModelSubscriptionPlanFilterInput) {
     onDeletePlan(filter: $filter) {
-      id
+      Id
       Company_Name
       Types
       Next_Payment_Date
       Ec2_IP_Address
       Payment_Status
+      id
       createdAt
       updatedAt
       __typename
@@ -49,7 +52,7 @@ export const onDeletePlan = /* GraphQL */ `
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
     onCreateUser(filter: $filter) {
-      id
+      User_Pool_Id
       Company_Name
       Phone_Number
       City
@@ -58,6 +61,7 @@ export const onCreateUser = /* GraphQL */ `
       Contact_Phone_Number
       Description
       Amount_People
+      Plan_Id
       createdAt
       updatedAt
       __typename
@@ -67,7 +71,7 @@ export const onCreateUser = /* GraphQL */ `
 export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
     onUpdateUser(filter: $filter) {
-      id
+      User_Pool_Id
       Company_Name
       Phone_Number
       City
@@ -76,6 +80,7 @@ export const onUpdateUser = /* GraphQL */ `
       Contact_Phone_Number
       Description
       Amount_People
+      Plan_Id
       createdAt
       updatedAt
       __typename
@@ -85,7 +90,7 @@ export const onUpdateUser = /* GraphQL */ `
 export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
     onDeleteUser(filter: $filter) {
-      id
+      User_Pool_Id
       Company_Name
       Phone_Number
       City
@@ -94,6 +99,7 @@ export const onDeleteUser = /* GraphQL */ `
       Contact_Phone_Number
       Description
       Amount_People
+      Plan_Id
       createdAt
       updatedAt
       __typename

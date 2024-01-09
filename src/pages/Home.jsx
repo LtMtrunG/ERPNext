@@ -1,6 +1,6 @@
 import Navbar from '../Components/Navbar'
 import Header from '../Components/Header'
-import Footer from '../Components/Footer'
+import Footer from '../Components/Footer' 
 const Home = () => {
   const containerStyle = {
     position: 'relative',
@@ -28,7 +28,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer /> 
     </div>
   )
 }

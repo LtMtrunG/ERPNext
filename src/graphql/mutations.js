@@ -7,12 +7,13 @@ export const createPlan = /* GraphQL */ `
     $condition: ModelPlanConditionInput
   ) {
     createPlan(input: $input, condition: $condition) {
-      id
+      Id
       Company_Name
       Types
       Next_Payment_Date
       Ec2_IP_Address
       Payment_Status
+      id
       createdAt
       updatedAt
       __typename
@@ -25,12 +26,13 @@ export const updatePlan = /* GraphQL */ `
     $condition: ModelPlanConditionInput
   ) {
     updatePlan(input: $input, condition: $condition) {
-      id
+      Id
       Company_Name
       Types
       Next_Payment_Date
       Ec2_IP_Address
       Payment_Status
+      id
       createdAt
       updatedAt
       __typename
@@ -43,12 +45,13 @@ export const deletePlan = /* GraphQL */ `
     $condition: ModelPlanConditionInput
   ) {
     deletePlan(input: $input, condition: $condition) {
-      id
+      Id
       Company_Name
       Types
       Next_Payment_Date
       Ec2_IP_Address
       Payment_Status
+      id
       createdAt
       updatedAt
       __typename
@@ -61,7 +64,7 @@ export const createUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     createUser(input: $input, condition: $condition) {
-      id
+      User_Pool_Id
       Company_Name
       Phone_Number
       City
@@ -70,6 +73,7 @@ export const createUser = /* GraphQL */ `
       Contact_Phone_Number
       Description
       Amount_People
+      Plan_Id
       createdAt
       updatedAt
       __typename
@@ -82,7 +86,7 @@ export const updateUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     updateUser(input: $input, condition: $condition) {
-      id
+      User_Pool_Id
       Company_Name
       Phone_Number
       City
@@ -91,6 +95,7 @@ export const updateUser = /* GraphQL */ `
       Contact_Phone_Number
       Description
       Amount_People
+      Plan_Id
       createdAt
       updatedAt
       __typename
@@ -103,7 +108,7 @@ export const deleteUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     deleteUser(input: $input, condition: $condition) {
-      id
+      User_Pool_Id
       Company_Name
       Phone_Number
       City
@@ -112,6 +117,7 @@ export const deleteUser = /* GraphQL */ `
       Contact_Phone_Number
       Description
       Amount_People
+      Plan_Id
       createdAt
       updatedAt
       __typename

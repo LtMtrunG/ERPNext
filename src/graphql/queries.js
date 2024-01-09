@@ -4,12 +4,13 @@
 export const getPlan = /* GraphQL */ `
   query GetPlan($id: ID!) {
     getPlan(id: $id) {
-      id
+      Id
       Company_Name
       Types
       Next_Payment_Date
       Ec2_IP_Address
       Payment_Status
+      id
       createdAt
       updatedAt
       __typename
@@ -24,12 +25,13 @@ export const listPlans = /* GraphQL */ `
   ) {
     listPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        id
+        Id
         Company_Name
         Types
         Next_Payment_Date
         Ec2_IP_Address
         Payment_Status
+        id
         createdAt
         updatedAt
         __typename
@@ -40,9 +42,9 @@ export const listPlans = /* GraphQL */ `
   }
 `;
 export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
-      id
+  query GetUser($User_Pool_Id: ID!) {
+    getUser(User_Pool_Id: $User_Pool_Id) {
+      User_Pool_Id
       Company_Name
       Phone_Number
       City
@@ -51,6 +53,7 @@ export const getUser = /* GraphQL */ `
       Contact_Phone_Number
       Description
       Amount_People
+      Plan_Id
       createdAt
       updatedAt
       __typename
@@ -59,13 +62,21 @@ export const getUser = /* GraphQL */ `
 `;
 export const listUsers = /* GraphQL */ `
   query ListUsers(
+    $User_Pool_Id: ID
     $filter: ModelUserFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUsers(
+      User_Pool_Id: $User_Pool_Id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
-        id
+        User_Pool_Id
         Company_Name
         Phone_Number
         City
@@ -74,6 +85,7 @@ export const listUsers = /* GraphQL */ `
         Contact_Phone_Number
         Description
         Amount_People
+        Plan_Id
         createdAt
         updatedAt
         __typename
