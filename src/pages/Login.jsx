@@ -13,6 +13,7 @@ import '@aws-amplify/ui-react/styles.css'
 const Login = () => {
 
     const [userPool, setUserPool] = useState();
+    const [company, setCompany] = useState(true);
     const client = generateClient();
 
     const textStyle = {
@@ -70,11 +71,16 @@ const Login = () => {
                                     }
                                 }
                             });
+                            setCompany(false);
                         } catch (error) {
                             console.log('Error saving post', error);
                         }
                     }
                     createUserData();
+                } else {
+                    if (oneUser.data.getUser.Company_Name === "") {
+                        setCompany(false);
+                    }
                 }
             } catch (error) {
                 console.log('Error getting post', error);
@@ -82,7 +88,7 @@ const Login = () => {
         }
         getUserData();
 
-}, [client, getUser, createUser, userPool]);
+}, [client, getUser, createUser, userPool, company]);
 
 const { user, setUser } = useContext(UserContext);
 const navigate = useNavigate();
@@ -119,7 +125,11 @@ const handleUserUpdateAndNavigate = (currUser) => {
     // Assuming userStateToUpdate is the new user state value
     setUser(currUser);
     console.log(currUser);
-    navigate('/HomeLogin'); // Replace '/newPage' with your desired path
+    if (company) {
+        navigate('/HomeLogin'); // Replace '/newPage' with your desired path
+    } else {
+        navigate('/Freetrial2');
+    }
 };
 
 
@@ -128,7 +138,7 @@ return (
         <MDBRow>
 
             <MDBCol col='10' md='6' className='d-flex flex-column align-items-center' style={{ background: '#FFFFFF', height: '100vh' }}>
-                <img className='image-fluid' href="#" src="./src/assets/brand.png" width="400" alt="" />
+                <img className='image-fluid' href="#" src="https://amplify-erpconnect-dev-135834-deployment.s3.amazonaws.com/brand.png" width="400" alt="" />
                 <h1 className='display-1' style={textStyle}>ERPConnect</h1>
             </MDBCol>
 
@@ -148,11 +158,23 @@ return (
                                 </div>
                                 <div className="container d-flex flex-column justify-content-center">
                                     <div className="row justify-content-center">
-                                        <MDBBtn
-                                            className="col-md-7 mb-1"
-                                            style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
-                                            onClick={() => handleUserUpdateAndNavigate(user)}
-                                        >Go to home page</MDBBtn>
+                                    {company ? (
+                <MDBBtn
+                    className="col-md-7 mb-1"
+                    style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
+                    onClick={() => handleUserUpdateAndNavigate(user)}
+                >
+                    Go to home page
+                </MDBBtn>
+            ) : (
+                <MDBBtn
+                    className="col-md-7 mb-1"
+                    style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
+                    onClick={() => handleUserUpdateAndNavigate(user)}
+                >
+                    Go to company register page
+                </MDBBtn>
+            )}
                                     </div>
                                 </div>
                                 {/* <button onClick={signOut}>Sign out</button> */}
