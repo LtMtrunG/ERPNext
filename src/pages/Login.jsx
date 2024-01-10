@@ -121,10 +121,9 @@ Hub.listen('auth', ({ payload }) => {
     }
 });
 
-const handleUserUpdateAndNavigate = (currUser) => {
+const handleUserUpdateAndNavigate = () => {
     // Assuming userStateToUpdate is the new user state value
-    setUser(currUser);
-    console.log(currUser);
+    setUser(userPool);
     if (company) {
         navigate('/HomeLogin'); // Replace '/newPage' with your desired path
     } else {
@@ -150,7 +149,7 @@ return (
                         {({ signOut, user }) => (
                             <main>
                                 <div class="col  d-flex justify-content-end align-items-start">
-                                    <h3 style={nameStyle}>Hi, {user.username}</h3>
+                                    <h3 style={nameStyle}>Hi, {user.userId}</h3>
 
                                 </div>
                                 <div className="text-center">
@@ -162,7 +161,7 @@ return (
                 <MDBBtn
                     className="col-md-7 mb-1"
                     style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
-                    onClick={() => handleUserUpdateAndNavigate(user)}
+                    onClick={() => handleUserUpdateAndNavigate()}
                 >
                     Go to home page
                 </MDBBtn>

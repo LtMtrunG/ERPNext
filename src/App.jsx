@@ -14,10 +14,8 @@ import { UserContext} from "./UserContext"
 Amplify.configure(config);
 
 const App = () => {
-    const [user, setUser] = useState(null);
-
-
-
+    const [user, setUser] = useState("");
+    
   return (
     
     <UserContext.Provider value={{ user, setUser }}>
