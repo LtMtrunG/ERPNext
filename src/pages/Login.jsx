@@ -127,7 +127,7 @@ const handleUserUpdateAndNavigate = () => {
     if (company) {
         navigate('/HomeLogin'); // Replace '/newPage' with your desired path
     } else {
-        navigate('/Freetrial2');
+        navigate('/CompanyRegistration');
     }
 };
 

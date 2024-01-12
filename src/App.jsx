@@ -11,6 +11,7 @@ import { Amplify } from 'aws-amplify'
 import config from './aws-exports';
 import { createContext, useContext, useState } from 'react';
 import { UserContext} from "./UserContext"
+import CompanyRegistration from "./pages/CompanyRegistration"
 Amplify.configure(config);
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/" element={<Home />}></Route>
         <Route path="/Login" element={<Login />}></Route>
         <Route path="/Signup" element={<Signup />}></Route>
+        <Route path="CompanyRegistration" element={<CompanyRegistration/>}></Route>
         <Route path="/HomeLogin" element={<HomeLogin />}></Route>
         <Route path="/Freetrial1" element={<Freetrial1 />}></Route>
         <Route path="/Freetrial2" element={<Freetrial2 />}></Route>
