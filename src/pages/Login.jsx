@@ -88,106 +88,106 @@ const Login = () => {
         }
         getUserData();
 
-}, [client, getUser, createUser, userPool, company]);
+    }, [client, getUser, createUser, userPool, company]);
 
-const { user, setUser } = useContext(UserContext);
-const navigate = useNavigate();
+    const { user, setUser } = useContext(UserContext);
+    const navigate = useNavigate();
 
-Hub.listen('auth', ({ payload }) => {
-    switch (payload.event) {
-        case 'signedIn':
-            console.log('user have been signedIn successfully.');
-            setUserPool(payload.data.userId);
-            console.log(userPool);
-            break;
-        case 'signedOut':
-            console.log('user have been signedOut successfully.');
-            break;
-        case 'tokenRefresh':
-            console.log('auth tokens have been refreshed.');
-            break;
-        case 'tokenRefresh_failure':
-            console.log('failure while refreshing auth tokens.');
-            break;
-        case 'signInWithRedirect':
-            console.log('signInWithRedirect API has successfully been resolved.');
-            break;
-        case 'signInWithRedirect_failure':
-            console.log('failure while trying to resolve signInWithRedirect API.');
-            break;
-        case 'customOAuthState':
-            logger.info('custom state returned from CognitoHosted UI');
-            break;
-    }
-});
+    Hub.listen('auth', ({ payload }) => {
+        switch (payload.event) {
+            case 'signedIn':
+                console.log('user have been signedIn successfully.');
+                setUserPool(payload.data.userId);
+                console.log(userPool);
+                break;
+            case 'signedOut':
+                console.log('user have been signedOut successfully.');
+                break;
+            case 'tokenRefresh':
+                console.log('auth tokens have been refreshed.');
+                break;
+            case 'tokenRefresh_failure':
+                console.log('failure while refreshing auth tokens.');
+                break;
+            case 'signInWithRedirect':
+                console.log('signInWithRedirect API has successfully been resolved.');
+                break;
+            case 'signInWithRedirect_failure':
+                console.log('failure while trying to resolve signInWithRedirect API.');
+                break;
+            case 'customOAuthState':
+                logger.info('custom state returned from CognitoHosted UI');
+                break;
+        }
+    });
 
-const handleUserUpdateAndNavigate = () => {
-    // Assuming userStateToUpdate is the new user state value
-    setUser(userPool);
-    if (company) {
-        navigate('/HomeLogin'); // Replace '/newPage' with your desired path
-    } else {
-        navigate('/CompanyRegistration');
-    }
-};
+    const handleUserUpdateAndNavigate = () => {
+        // Assuming userStateToUpdate is the new user state value
+        setUser(userPool);
+        if (company) {
+            navigate('/HomeLogin'); // Replace '/newPage' with your desired path
+        } else {
+            navigate('/CompanyRegistration');
+        }
+    };
 
 
-return (
-    <div className="container-fluid" style={containerStyle}>
-        <MDBRow>
+    return (
+        <div className="container-fluid" style={containerStyle}>
+            <MDBRow>
 
-            <MDBCol col='10' md='6' className='d-flex flex-column align-items-center' style={{ background: '#FFFFFF', height: '100vh' }}>
-                <img className='image-fluid' href="#" src="https://amplify-erpconnect-dev-135834-deployment.s3.amazonaws.com/brand.png" width="400" alt="" />
-                <h1 className='display-1' style={textStyle}>ERPConnect</h1>
-            </MDBCol>
+                <MDBCol col='10' md='6' className='d-flex flex-column align-items-center' style={{ background: '#FFFFFF', height: '100vh' }}>
+                    <img className='image-fluid' href="#" src="https://amplify-erpconnect-dev-135834-deployment.s3.amazonaws.com/brand.png" width="400" alt="" />
+                    <h1 className='display-1' style={textStyle}>ERPConnect</h1>
+                </MDBCol>
 
-            <MDBCol col='10' md='6'>
+                <MDBCol col='10' md='6'>
 
-                <div className="d-flex flex-column ms-5 mt-5">
+                    <div className="d-flex flex-column ms-5 mt-5">
 
-                    <Authenticator>
-                        {({ signOut, user }) => (
-                            <main>
-                                <div class="col  d-flex justify-content-end align-items-start">
-                                    <h3 style={nameStyle}>Hi, {user.userId}</h3>
+                        <Authenticator>
+                            {({ signOut, user }) => (
+                                <main>
+                                    <div class="col  d-flex justify-content-end align-items-start">
+                                        <h3 style={nameStyle}>Hi, {user.userId}</h3>
 
-                                </div>
-                                <div className="text-center">
-                                    <h1 className="mb-5 mt-5 pb-1" style={loginStyle}>Log in successfully</h1>
-                                </div>
-                                <div className="container d-flex flex-column justify-content-center">
-                                    <div className="row justify-content-center">
-                                    {company ? (
-                <MDBBtn
-                    className="col-md-7 mb-1"
-                    style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
-                    onClick={() => handleUserUpdateAndNavigate()}
-                >
-                    Go to home page
-                </MDBBtn>
-            ) : (
-                <MDBBtn
-                    className="col-md-7 mb-1"
-                    style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
-                    onClick={() => handleUserUpdateAndNavigate(user)}
-                >
-                    Go to company register page
-                </MDBBtn>
-            )}
                                     </div>
-                                </div>
-                                {/* <button onClick={signOut}>Sign out</button> */}
-                            </main>
-                        )}
-                    </Authenticator>
+                                    <div className="text-center">
+                                        <h1 className="mb-5 mt-5 pb-1" style={loginStyle}>Log in successfully</h1>
+                                    </div>
+                                    <div className="container d-flex flex-column justify-content-center">
+                                        <div className="row justify-content-center">
+                                            {company ? (
+                                                <MDBBtn
+                                                    className="col-md-7 mb-1"
+                                                    style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
+                                                    onClick={() => handleUserUpdateAndNavigate()}
+                                                >
+                                                    Go to home page
+                                                </MDBBtn>
+                                            ) : (
+                                                <MDBBtn
+                                                    className="col-md-7 mb-1"
+                                                    style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
+                                                    onClick={() => handleUserUpdateAndNavigate()}
+                                                >
+                                                    Go to company register page
+                                                </MDBBtn>
+                                            )}
+                                        </div>
+                                    </div>
+                                    {/* <button onClick={signOut}>Sign out</button> */}
+                                </main>
+                            )}
+                        </Authenticator>
 
-                </div>
+                    </div>
 
-            </MDBCol>
+                </MDBCol>
 
-        </MDBRow>
-    </div>
-);
+            </MDBRow>
+        </div>
+    );
 }
 
 export default Login;
