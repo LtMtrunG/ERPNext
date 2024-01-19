@@ -43,8 +43,6 @@ const Login = () => {
         const getUserData = async () => {
             try {
                 // Get a specific item
-                console.log('getuser');
-                console.log(userPool);
                 const oneUser = await client.graphql({
                     query: getUser,
                     variables: { User_Pool_Id: userPool }
@@ -124,6 +122,7 @@ const Login = () => {
     const handleUserUpdateAndNavigate = () => {
         // Assuming userStateToUpdate is the new user state value
         setUser(userPool);
+        localStorage.setItem("user", JSON.stringify(userPool));
         if (company) {
             navigate('/HomeLogin'); // Replace '/newPage' with your desired path
         } else {

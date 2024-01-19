@@ -35,6 +35,7 @@ const Mysubscription = () => {
 
     const navigate = useNavigate();
     const { user, setUser } = useContext(UserContext);
+    const [currUser, setCurrUser] = useState();
     const [plan, setPlan] = useState();
     const [companyName, setCompanyName] = useState();
     const [planName, setPlanName] = useState();
@@ -43,13 +44,17 @@ const Mysubscription = () => {
 
 
     useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem("user")));
+        console.log(user);
         const getUserData = async () => {
             try {
+                console.log(user);
                 const oneUser = await client.graphql({
                     query: getUser,
                     variables: { User_Pool_Id: user }
                 });
                 console.log(oneUser);
+                setCurrUser(oneUser);
                 if (oneUser.data.getUser.Plan_Id === "") {
                     console.log('No plan');
                     setPlan('No plan');
@@ -81,22 +86,26 @@ const Mysubscription = () => {
         }
         const fetchData = async () => {
             try {
-              const response = await fetch('http://localhost:4242/customers'); // Assuming your server is running on the same host as your React app
+              if (currUser !== null) {
+                //const customerEmail = currUser.
+              //const response = await fetch('http://localhost:4242/customers'); // Assuming your server is running on the same host as your React app
+              const response1 = await fetch('http://localhost:4242/subscriptions');
               //const data = await response.json();
               //console.log(data); // This will log the response from the server
       
               // You can now do something with the data, update your component state, etc.
+              }
             } catch (error) {
               console.error('Error fetching data:', error);
               // Handle the error, display an error message, etc.
             }
           };
       
-          fetchData();
+          //fetchData();
         getUserData();
         getPlanData();
 
-    }, [client, plan]);
+    }, [currUser, user]);
 
     return (
         <div>
