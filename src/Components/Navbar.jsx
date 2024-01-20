@@ -53,7 +53,7 @@ const Navbar = () => {
                 <div className="col align-items-center">
                     <MDBBtn
                         className="col-sm-5 fs-5"
-                        style={{ color: '#FFFFFF', background: '#243C54', border: 'none', height: '40px' }}
+                        style={{ color: '#FFFFFF', background: '#243C54', border: 'none', height: '40px' , visibility: 'hidden'}}
                         onClick={() => navigate('/Login')}
                     >Try for free</MDBBtn>
                     <MDBBtn 

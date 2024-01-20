@@ -35,10 +35,15 @@ const HomeLogin = () => {
   const [inf, setInf] = useState();
   const [companyList, setCompanyList] = useState([]);
   const [productList, setProductList] = useState([]);
+  const [allDataFetched, setAllDataFetched] = useState(false);
   let run = 1000000;
 
   useEffect(() => {
-    setInf(run);
+
+    if (allDataFetched) {
+      // Do nothing if all data has been fetched
+      return;
+  }
     const getUserData = async () => {
       try {
         const oneUser = await client.graphql({
@@ -199,10 +204,14 @@ const HomeLogin = () => {
         });
     }
 
+    if (companyList.length === productList.length && companyList.length !== 0) {
+      setAllDataFetched(true);
+    }
+
     getUserData();
     fetchEmail();
 
-  }, [currUser, company, companyList, productList]);
+  }, [currUser, companyList, productList, allDataFetched]);
 
   return (
     <div>

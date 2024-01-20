@@ -9,7 +9,7 @@ import { listUsers, getUser } from "../graphql/queries";
 import { listPlans, getPlan } from "../graphql/queries";
 import { loadStripe } from '@stripe/stripe-js';
 import { fetchUserAttributes } from 'aws-amplify/auth';
-import axios from 'axios';
+import axios, { all } from 'axios';
 import { updateUser } from '../graphql/mutations'
 
 const Mysubscription = () => {
@@ -46,8 +46,17 @@ const Mysubscription = () => {
     const [subscriptionData, setSubscriptionData] = useState([]);
     const [sendRequest, setSendRequest] = useState(false);
     const [email, setEmail] = useState();
+    const [companyList, setCompanyList] = useState([]);
+    const [productList, setProductList] = useState([]);
+    const [allDataFetched, setAllDataFetched] = useState(false);
+    const uniqueCompanies = new Set();
+    const uniqueProducts = new Set();
 
     useEffect(() => {
+
+        if (allDataFetched) {
+            return;
+        }
         setSubscriptionData([]); // Clear the existing data
 
         setUser(JSON.parse(localStorage.getItem("user")));
@@ -121,40 +130,48 @@ const Mysubscription = () => {
         }
 
         const getEventDetail = (eventID) => {
-            const eventApiUrl = 'https://api.stripe.com/v1/events/' + eventID;
-            axios.get(eventApiUrl, {
-                headers: {
-                    'Authorization': `Bearer ${secretKey}`,
-                },
-            })
-                .then(response => {
-                    const companyName = response.data.data.object.custom_fields.find(field => field.key === "companyname").text.value;
-                    console.log(companyName);
-                    const numberOfEmployee = response.data.data.object.custom_fields.find(field => field.key === "numberofemployees").numeric.value;
-                    console.log(numberOfEmployee);
-                    const subscriptionID = response.data.data.object.subscription;
-                    setSubscriptionData(prevData => [
-                        ...prevData,
-                        {
-                            companyName,
-                            //numberOfEmployee,
-                            subscriptionID,
-                        },
-                    ]);
-                    getSubscription(subscriptionID);
+            if (companyList.length <= currUser.data.getUser.EventID.length) {
+                const eventApiUrl = 'https://api.stripe.com/v1/events/' + eventID;
+                axios.get(eventApiUrl, {
+                    headers: {
+                        'Authorization': `Bearer ${secretKey}`,
+                    },
                 })
-                .catch(error => {
-                    console.error(error.response.data);
-                });
+                    .then(response => {
+                        const subscriptionID = response.data.data.object.subscription;
+                        const companyName = response.data.data.object.custom_fields.find(field => field.key === "companyname").text.value;
+                        console.log(companyName);
+                        if (!uniqueCompanies.has(companyName) && uniqueCompanies.size <= currUser.data.getUser.EventID.length) {
+                            uniqueCompanies.add(companyName);
+                            setCompanyList(prevCompanyList => [...prevCompanyList, companyName]);
+                            setSubscriptionData(prevData => [
+                                ...prevData,
+                                {
+                                    companyName,
+                                    subscriptionID,
+                                },
+                            ]);
+
+                            console.log(subscriptionData.length);
+                            console.log(companyList.length);
+                        }
+                        const numberOfEmployee = response.data.data.object.custom_fields.find(field => field.key === "numberofemployees").numeric.value;
+                        console.log(numberOfEmployee);
+                        getSubscription(subscriptionID);
+                    })
+                    .catch(error => {
+                        console.error(error.response.data);
+                    });
+            }
         }
 
         const fetchEmail = async () => {
             try {
                 const userAttributes = await fetchUserAttributes();
                 setEmail(userAttributes.email);
-              } catch (error) {
+            } catch (error) {
                 console.log(error);
-              }
+            }
         }
 
         const getSubscription = (subscriptionID) => {
@@ -182,32 +199,42 @@ const Mysubscription = () => {
                         productName = 'Standard';
                     }
 
-                    console.log(productName);
-                    setSubscriptionData(prevData => {
-                        const updatedData = prevData.map(entry => {
-                            if (entry.subscriptionID === subscriptionID) {
-                                return {
-                                    ...entry,
-                                    endDateFormatted,
-                                    productName,
-                                };
-                            }
-                            return entry;
+                    if (!uniqueProducts.has(productName) && uniqueProducts.size <= currUser.data.getUser.EventID.length) {
+                        uniqueProducts.add(productName);
+                        setProductList(prevProductList => [...prevProductList, productName]);
+                        setSubscriptionData(prevData => {
+                            const updatedData = prevData.map(entry => {
+                                if (entry.subscriptionID === subscriptionID) {
+                                    return {
+                                        ...entry,
+                                        endDateFormatted,
+                                        productName,
+                                    };
+                                }
+                                return entry;
+                            });
+                            return updatedData;
                         });
-                        return updatedData;
-                    });
+                    }
+
+                    console.log(productName);
                 })
                 .catch(error => {
                     console.error(error.response.data);
                 });
         }
-        //fetchUser();
+        if (companyList.length === productList.length && companyList.length !== 0) {
+            setAllDataFetched(true);
+            console.log('End' + companyList.length);
+        }
+
+        console.log(companyList);
+        console.log(productList);
+
         getUserData();
         fetchEmail();
-        //sentRequest();
-        // getPlanData();
 
-    }, [currUser, email, user, plan, sendRequest, product, company]);
+    }, [currUser, companyList, productList, allDataFetched]);
 
     const handleRowClick = (entry) => {
         // Perform actions when a row is clicked, e.g., navigate to a new page
@@ -253,7 +280,7 @@ const Mysubscription = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {subscriptionData.map(entry => (
+                                    {subscriptionData.slice(0, 3).map(entry => (
                                         <tr key={entry.subscriptionID} onClick={() => handleRowClick(entry)}>
                                             <td>{entry.companyName}</td>
                                             <td>{entry.productName}</td>

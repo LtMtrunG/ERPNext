@@ -65,8 +65,7 @@ const NavbarLogin = () => {
                 <div className="col align-items-center">
                     <MDBBtn
                         className="col-sm-5 fs-5"
-                        style={{ color: '#FFFFFF', background: '#243C54', border: 'none', height: '40px' }}
-                        onClick={() => navigate('/Freetrial1')}
+                        style={{ color: '#FFFFFF', background: '#243C54', border: 'none', height: '40px', visibility: 'hidden'}}
                     >Try for free</MDBBtn>
                     <MDBBtn 
                         className="col-sm-5 ml-3 fs-5" 
