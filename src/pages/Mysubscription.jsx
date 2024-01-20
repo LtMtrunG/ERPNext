@@ -11,6 +11,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { fetchUserAttributes } from 'aws-amplify/auth';
 import axios, { all } from 'axios';
 import { updateUser } from '../graphql/mutations'
+import { Button } from 'react-scroll';
 
 const Mysubscription = () => {
 
@@ -51,6 +52,7 @@ const Mysubscription = () => {
     const [allDataFetched, setAllDataFetched] = useState(false);
     const uniqueCompanies = new Set();
     const uniqueProducts = new Set();
+    const [updateData, setUpdateData] = useState(false);
 
     useEffect(() => {
 
@@ -144,11 +146,14 @@ const Mysubscription = () => {
                         if (!uniqueCompanies.has(companyName) && uniqueCompanies.size <= currUser.data.getUser.EventID.length) {
                             uniqueCompanies.add(companyName);
                             setCompanyList(prevCompanyList => [...prevCompanyList, companyName]);
+                            const link = companyName + '.erpconnect.online';
                             setSubscriptionData(prevData => [
                                 ...prevData,
                                 {
                                     companyName,
+                                    link,
                                     subscriptionID,
+                                    eventID,
                                 },
                             ]);
 
@@ -234,21 +239,37 @@ const Mysubscription = () => {
         getUserData();
         fetchEmail();
 
-    }, [currUser, companyList, productList, allDataFetched]);
+    }, [currUser, user, companyList, productList, allDataFetched, updateData]);
 
-    const handleRowClick = (entry) => {
-        // Perform actions when a row is clicked, e.g., navigate to a new page
+    const handleCancel = (entry) => {
+        const updatedEventID = currUser.data.getUser.EventID.filter(id => id !== entry.id);
 
-        console.log(`Row clicked: ${entry.companyName}`);
-        // Add your navigation logic or other actions here
-        // Assuming companyName is a variable containing the company name
-        const companyName = entry.companyName.toLowerCase();
+        // Update the currUser state with the modified EventID list
+        setCurrUser(prevCurrUser => ({
+            ...prevCurrUser,
+            data: {
+                ...prevCurrUser.data,
+                getUser: {
+                    ...prevCurrUser.data.getUser,
+                    EventID: updatedEventID,
+                },
+            },
+        }));
 
-        // Construct the destination URL
-        const destinationURL = `https://${companyName}.erpconnect.online`;
+        const requestData = {
+            body: JSON.stringify({
+                companySubdomain: entry.companyName.toLowerCase(),
+                instanceName: 'ERPNext_Instance_' + entry.companyName.toLowerCase(),
+            }),
+        };
 
-        // Redirect to the destination URL
-        window.location.href = destinationURL;
+        axios.post('https://qzvhm4juig.execute-api.us-east-1.amazonaws.com/prod/DeleteResources', requestData)
+            .then(response => {
+                console.log("Response from the server:", response.data);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
     };
 
     return (
@@ -277,16 +298,27 @@ const Mysubscription = () => {
                                         <th scope="col">Company Name</th>
                                         <th scope="col">Plan</th>
                                         <th scope="col">End Date</th>
+                                        <th scope="col">ERPNext domain</th>
+                                        <th scope="col">Cancel</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {subscriptionData.slice(0, 3).map(entry => (
-                                        <tr key={entry.subscriptionID} onClick={() => handleRowClick(entry)}>
-                                            <td>{entry.companyName}</td>
-                                            <td>{entry.productName}</td>
-                                            <td>{entry.endDateFormatted}</td>
-                                        </tr>
-                                    ))}
+                                    {subscriptionData.map((entry, index) => {
+                                        if (index < currUser.data.getUser.EventID.length) {
+                                            return (
+                                                <tr key={entry.subscriptionID}>
+                                                    <td>{entry.companyName}</td>
+                                                    <td>{entry.productName}</td>
+                                                    <td>{entry.endDateFormatted}</td>
+                                                    <td> <a href={`http://${entry.link.toLowerCase()}`} target="_blank" rel="noopener noreferrer">
+                                                        {entry.link.toLowerCase()}
+                                                    </a></td>
+                                                    <td><Button onClick={() => handleCancel(entry)} style={{ backgroundColor: 'red', color: 'white' }}>Cancel</Button></td>
+                                                </tr>
+                                            )
+                                        }
+                                        return null; // Return null for rows after the first three
+                                    })}
                                 </tbody>
                             </table>
 

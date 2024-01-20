@@ -36,6 +36,8 @@ const HomeLogin = () => {
   const [companyList, setCompanyList] = useState([]);
   const [productList, setProductList] = useState([]);
   const [allDataFetched, setAllDataFetched] = useState(false);
+  const uniqueCompanies = new Set();
+  const uniqueProducts = new Set();
   let run = 1000000;
 
   useEffect(() => {
@@ -43,12 +45,12 @@ const HomeLogin = () => {
     if (allDataFetched) {
       // Do nothing if all data has been fetched
       return;
-  }
+    }
     const getUserData = async () => {
       try {
         const oneUser = await client.graphql({
           query: getUser,
-          variables: { User_Pool_Id:  JSON.parse(localStorage.getItem("user"))}
+          variables: { User_Pool_Id: JSON.parse(localStorage.getItem("user")) }
         });
         setCurrUser(oneUser);
       } catch (error) {
@@ -123,12 +125,10 @@ const HomeLogin = () => {
         .then(response => {
           const companyName = response.data.data.object.custom_fields.find(field => field.key === "companyname").text.value;
           console.log(companyName);
-          if (!companyList.includes(companyName)) {
-            setCompanyList(prevCompanyList => {
-              const uniqueCompanies = new Set([...prevCompanyList, companyName]);
-              return Array.from(uniqueCompanies);
-            });
-          }          
+          if (!uniqueCompanies.has(companyName) && uniqueCompanies.size <= currUser.data.getUser.EventID.length) {
+            uniqueCompanies.add(companyName);
+            setCompanyList(prevCompanyList => [...prevCompanyList, companyName]);
+          }
           const numberOfEmployee = response.data.data.object.custom_fields.find(field => field.key === "numberofemployees").numeric.value;
           console.log(numberOfEmployee);
           const subscriptionID = response.data.data.object.subscription;
@@ -171,11 +171,9 @@ const HomeLogin = () => {
           } else {
             productName = 'Standard';
           }
-          if (!productList.includes(productName)) {
-            setProductList(prevProductList => {
-              const uniqueProducts = new Set([...prevProductList, productName]);
-              return Array.from(uniqueProducts);
-            });
+          if (!uniqueProducts.has(productName) && uniqueProducts.size <= currUser.data.getUser.EventID.length) {
+            uniqueProducts.add(productName);
+            setProductList(prevProductList => [...prevProductList, productName]);
           }
         })
         .catch(error => {
@@ -187,7 +185,7 @@ const HomeLogin = () => {
     console.log(productList)
 
     for (let i = 0; i < Math.min(companyList.length, productList.length); i++) {
-      
+
       const requestData = {
         body: JSON.stringify({
           subscriptionType: productList[i].toLowerCase(),
