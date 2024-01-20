@@ -1,5 +1,5 @@
-import StripePricingTable from "./StripePricingTable";
-const Footer = () => {
+import StripePricingTableLogin from "./StripePricingTableLogin";
+const FooterLogin = () => {
 
     const cardStyle = {
         backgroundColor: '#243C54',
@@ -20,15 +20,15 @@ const Footer = () => {
 
 
     return (
-            
-        <nav className="footer section" id="pricing" style={{width: '100vw'}}>
+
+        <nav className="footer section" id="pricing" style={{ width: '100vw' }}>
             <div className="container-fluid text-center mb-5">
-            <h1 className="nav-link fs-3  fw-bold mt-5 mb-5" style={textStyle} href="#">Pricing</h1>
-            <StripePricingTable />
+                <h1 className="nav-link fs-3  fw-bold mt-5 mb-5" style={textStyle} href="#">Pricing</h1>
+                <StripePricingTableLogin />
             </div>
 
         </nav>
     )
 }
 
-export default Footer
+export default FooterLogin

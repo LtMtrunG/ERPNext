@@ -13,7 +13,6 @@ import '@aws-amplify/ui-react/styles.css'
 const Login = () => {
 
     const [userPool, setUserPool] = useState();
-    const [company, setCompany] = useState(true);
     const client = generateClient();
 
     const textStyle = {
@@ -57,15 +56,7 @@ const Login = () => {
                                 variables: {
                                     input: {
                                         "User_Pool_Id": userPool,
-                                        "Company_Name": "",
-                                        "Phone_Number": "",
-                                        "City": "",
-                                        "Business_Field": "",
-                                        "Contact_Person": "",
-                                        "Contact_Phone_Number": "",
-                                        "Description": "",
-                                        "Amount_People": 0,
-                                        "Plan_Id": ""
+                                        "EventID": [],
                                     }
                                 }
                             });
@@ -75,10 +66,6 @@ const Login = () => {
                         }
                     }
                     createUserData();
-                } else {
-                    if (oneUser.data.getUser.Company_Name === "") {
-                        setCompany(false);
-                    }
                 }
             } catch (error) {
                 console.log('Error getting post', error);
@@ -86,7 +73,7 @@ const Login = () => {
         }
         getUserData();
 
-    }, [client, getUser, createUser, userPool, company]);
+    }, [client, getUser, createUser, userPool]);
 
     const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
@@ -123,13 +110,8 @@ const Login = () => {
         // Assuming userStateToUpdate is the new user state value
         setUser(userPool);
         localStorage.setItem("user", JSON.stringify(userPool));
-        if (company) {
-            navigate('/HomeLogin'); // Replace '/newPage' with your desired path
-        } else {
-            navigate('/CompanyRegistration');
-        }
+        navigate('/HomeLogin'); // Replace '/newPage' with your desired path         
     };
-
 
     return (
         <div className="container-fluid" style={containerStyle}>
@@ -148,7 +130,7 @@ const Login = () => {
                             {({ signOut, user }) => (
                                 <main>
                                     <div class="col  d-flex justify-content-end align-items-start">
-                                        <h3 style={nameStyle}>Hi, {user.userId}</h3>
+                                        <h3 style={nameStyle}>Hi, {user.username}</h3>
 
                                     </div>
                                     <div className="text-center">
@@ -156,23 +138,13 @@ const Login = () => {
                                     </div>
                                     <div className="container d-flex flex-column justify-content-center">
                                         <div className="row justify-content-center">
-                                            {company ? (
-                                                <MDBBtn
-                                                    className="col-md-7 mb-1"
-                                                    style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
-                                                    onClick={() => handleUserUpdateAndNavigate()}
-                                                >
-                                                    Go to home page
-                                                </MDBBtn>
-                                            ) : (
-                                                <MDBBtn
-                                                    className="col-md-7 mb-1"
-                                                    style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
-                                                    onClick={() => handleUserUpdateAndNavigate()}
-                                                >
-                                                    Go to company register page
-                                                </MDBBtn>
-                                            )}
+                                            <MDBBtn
+                                                className="col-md-7 mb-1"
+                                                style={{ color: '#243C54', background: 'white', border: 'none', height: '40px' }}
+                                                onClick={() => handleUserUpdateAndNavigate()}
+                                            >
+                                                Go to home page
+                                            </MDBBtn>
                                         </div>
                                     </div>
                                     {/* <button onClick={signOut}>Sign out</button> */}

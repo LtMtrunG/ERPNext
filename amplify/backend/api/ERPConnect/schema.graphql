@@ -9,14 +9,6 @@ type Plan @model @auth(rules: [{allow: public}]) {
 
 type User @model @auth(rules: [{allow: public}]) {
   User_Pool_Id: ID! @primaryKey
-  Company_Name: String
-  Phone_Number: String
-  City: String
-  Business_Field: String
-  Contact_Person: String
-  Contact_Phone_Number: String
-  Description: String
-  Amount_People: Int
-  Plan_Id: String
+  EventID: [String!]
 }
  

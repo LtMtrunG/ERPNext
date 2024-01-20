@@ -65,15 +65,7 @@ export const createUser = /* GraphQL */ `
   ) {
     createUser(input: $input, condition: $condition) {
       User_Pool_Id
-      Company_Name
-      Phone_Number
-      City
-      Business_Field
-      Contact_Person
-      Contact_Phone_Number
-      Description
-      Amount_People
-      Plan_Id
+      EventID
       createdAt
       updatedAt
       __typename
@@ -87,15 +79,7 @@ export const updateUser = /* GraphQL */ `
   ) {
     updateUser(input: $input, condition: $condition) {
       User_Pool_Id
-      Company_Name
-      Phone_Number
-      City
-      Business_Field
-      Contact_Person
-      Contact_Phone_Number
-      Description
-      Amount_People
-      Plan_Id
+      EventID
       createdAt
       updatedAt
       __typename
@@ -109,15 +93,7 @@ export const deleteUser = /* GraphQL */ `
   ) {
     deleteUser(input: $input, condition: $condition) {
       User_Pool_Id
-      Company_Name
-      Phone_Number
-      City
-      Business_Field
-      Contact_Person
-      Contact_Phone_Number
-      Description
-      Amount_People
-      Plan_Id
+      EventID
       createdAt
       updatedAt
       __typename

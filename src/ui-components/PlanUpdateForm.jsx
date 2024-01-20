@@ -14,7 +14,7 @@ import { updatePlan } from "../graphql/mutations";
 const client = generateClient();
 export default function PlanUpdateForm(props) {
   const {
-    Id: IdProp,
+    id: idProp,
     plan: planModelProp,
     onSuccess,
     onError,
@@ -62,18 +62,18 @@ export default function PlanUpdateForm(props) {
   const [planRecord, setPlanRecord] = React.useState(planModelProp);
   React.useEffect(() => {
     const queryData = async () => {
-      const record = IdProp
+      const record = idProp
         ? (
             await client.graphql({
               query: getPlan.replaceAll("__typename", ""),
-              variables: { Id: IdProp },
+              variables: { id: idProp },
             })
           )?.data?.getPlan
         : planModelProp;
       setPlanRecord(record);
     };
     queryData();
-  }, [IdProp, planModelProp]);
+  }, [idProp, planModelProp]);
   React.useEffect(resetStateValues, [planRecord]);
   const validations = {
     Id: [{ type: "Required" }],
@@ -148,7 +148,7 @@ export default function PlanUpdateForm(props) {
             query: updatePlan.replaceAll("__typename", ""),
             variables: {
               input: {
-                Id: planRecord.Id,
+                id: planRecord.id,
                 ...modelFields,
               },
             },
@@ -169,7 +169,7 @@ export default function PlanUpdateForm(props) {
       <TextField
         label="Id"
         isRequired={true}
-        isReadOnly={true}
+        isReadOnly={false}
         value={Id}
         onChange={(e) => {
           let { value } = e.target;
@@ -353,7 +353,7 @@ export default function PlanUpdateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          isDisabled={!(IdProp || planModelProp)}
+          isDisabled={!(idProp || planModelProp)}
           {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
@@ -365,7 +365,7 @@ export default function PlanUpdateForm(props) {
             type="submit"
             variation="primary"
             isDisabled={
-              !(IdProp || planModelProp) ||
+              !(idProp || planModelProp) ||
               Object.values(errors).some((e) => e?.hasError)
             }
             {...getOverrideProps(overrides, "SubmitButton")}

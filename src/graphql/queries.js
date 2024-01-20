@@ -45,15 +45,7 @@ export const getUser = /* GraphQL */ `
   query GetUser($User_Pool_Id: ID!) {
     getUser(User_Pool_Id: $User_Pool_Id) {
       User_Pool_Id
-      Company_Name
-      Phone_Number
-      City
-      Business_Field
-      Contact_Person
-      Contact_Phone_Number
-      Description
-      Amount_People
-      Plan_Id
+      EventID
       createdAt
       updatedAt
       __typename
@@ -77,15 +69,7 @@ export const listUsers = /* GraphQL */ `
     ) {
       items {
         User_Pool_Id
-        Company_Name
-        Phone_Number
-        City
-        Business_Field
-        Contact_Person
-        Contact_Phone_Number
-        Description
-        Amount_People
-        Plan_Id
+        EventID
         createdAt
         updatedAt
         __typename

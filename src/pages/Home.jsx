@@ -1,6 +1,8 @@
 import Navbar from '../Components/Navbar'
 import Header from '../Components/Header'
 import Footer from '../Components/Footer' 
+import { useNavigate } from 'react-router-dom';
+
 const Home = () => {
   const containerStyle = {
     position: 'relative',
@@ -8,6 +10,13 @@ const Home = () => {
     width: '100vw',
     paddingLeft: 0,
   };
+  const navigate = useNavigate();
+
+  const handleFooterClick = () => {
+    console.log('Footer clicked');
+    navigate('/Login');
+  };
+
   return (
     <div>
       <Navbar />
@@ -28,7 +37,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Footer /> 
+      <p onClick={handleFooterClick}>
+        <Footer onClick={handleFooterClick} /> 
+      </p>
     </div>
   )
 }

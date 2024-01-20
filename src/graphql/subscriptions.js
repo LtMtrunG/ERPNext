@@ -53,15 +53,7 @@ export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
     onCreateUser(filter: $filter) {
       User_Pool_Id
-      Company_Name
-      Phone_Number
-      City
-      Business_Field
-      Contact_Person
-      Contact_Phone_Number
-      Description
-      Amount_People
-      Plan_Id
+      EventID
       createdAt
       updatedAt
       __typename
@@ -72,15 +64,7 @@ export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
     onUpdateUser(filter: $filter) {
       User_Pool_Id
-      Company_Name
-      Phone_Number
-      City
-      Business_Field
-      Contact_Person
-      Contact_Phone_Number
-      Description
-      Amount_People
-      Plan_Id
+      EventID
       createdAt
       updatedAt
       __typename
@@ -91,15 +75,7 @@ export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
     onDeleteUser(filter: $filter) {
       User_Pool_Id
-      Company_Name
-      Phone_Number
-      City
-      Business_Field
-      Contact_Person
-      Contact_Phone_Number
-      Description
-      Amount_People
-      Plan_Id
+      EventID
       createdAt
       updatedAt
       __typename

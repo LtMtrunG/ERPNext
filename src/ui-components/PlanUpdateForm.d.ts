@@ -50,7 +50,7 @@ export declare type PlanUpdateFormOverridesProps = {
 export declare type PlanUpdateFormProps = React.PropsWithChildren<{
     overrides?: PlanUpdateFormOverridesProps | undefined | null;
 } & {
-    Id?: string;
+    id?: string;
     plan?: any;
     onSubmit?: (fields: PlanUpdateFormInputValues) => PlanUpdateFormInputValues;
     onSuccess?: (fields: PlanUpdateFormInputValues) => void;
