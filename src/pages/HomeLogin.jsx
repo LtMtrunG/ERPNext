@@ -70,6 +70,7 @@ const HomeLogin = () => {
             },
           }
         });
+        setAllDataFetched(false);
       } catch (error) {
         console.log('Error updatting user', error);
       }

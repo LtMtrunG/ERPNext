@@ -56,6 +56,26 @@ const Mysubscription = () => {
 
     useEffect(() => {
 
+        if (company !== undefined) {
+            const instanceName = 'ERPNext_Instance_' + company;
+            console.log(instanceName);
+            const requestData = {
+                body: JSON.stringify({
+                    companySubdomain: company,
+                    instanceName: instanceName,
+                }),
+            };
+
+            axios.post('https://d97a4u0sc3.execute-api.us-east-1.amazonaws.com/production/DeleteResources', requestData)
+                .then(response => {
+                    console.log("Response from the server:", response.data);
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+            return;
+        }
+
         if (allDataFetched) {
             return;
         }
@@ -239,7 +259,7 @@ const Mysubscription = () => {
         getUserData();
         fetchEmail();
 
-    }, [currUser, user, companyList, productList, allDataFetched, updateData]);
+    }, [currUser, user, companyList, productList, allDataFetched, updateData, company]);
 
     const handleCancel = (entry) => {
         const updatedEventID = currUser.data.getUser.EventID.filter(id => id !== entry.id);
@@ -255,21 +275,7 @@ const Mysubscription = () => {
                 },
             },
         }));
-
-        const requestData = {
-            body: JSON.stringify({
-                companySubdomain: entry.companyName.toLowerCase(),
-                instanceName: 'ERPNext_Instance_' + entry.companyName.toLowerCase(),
-            }),
-        };
-
-        axios.post('https://qzvhm4juig.execute-api.us-east-1.amazonaws.com/prod/DeleteResources', requestData)
-            .then(response => {
-                console.log("Response from the server:", response.data);
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
+        setCompany(entry.companyName.toLowerCase());
     };
 
     return (
@@ -305,6 +311,7 @@ const Mysubscription = () => {
                                 <tbody>
                                     {subscriptionData.map((entry, index) => {
                                         if (index < currUser.data.getUser.EventID.length) {
+                                            console.log(currUser);
                                             return (
                                                 <tr key={entry.subscriptionID}>
                                                     <td>{entry.companyName}</td>
